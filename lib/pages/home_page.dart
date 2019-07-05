@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import '../routers/application.dart';
+import '../routers/routers.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,7 +22,8 @@ class _HomePageState extends State<HomePage>
   int page = 1;
   List<Map> hotGoodsList = [];
 
-  GlobalKey<RefreshFooterState> _footerkey = new GlobalKey<RefreshFooterState>();
+  GlobalKey<RefreshFooterState> _footerkey =
+      new GlobalKey<RefreshFooterState>();
 
   @override
   void initState() {
@@ -145,7 +148,10 @@ class _HomePageState extends State<HomePage>
     if (hotGoodsList.length > 0) {
       List<Widget> listWidget = hotGoodsList.map((item) {
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            Application.router
+                .navigateTo(context, '/detail?id=${item['goodsId']}');
+          },
           child: Container(
             width: ScreenUtil().setWidth(372),
             color: Colors.white,
