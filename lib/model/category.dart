@@ -6,7 +6,8 @@ class CategoryModelResp {
   CategoryModelResp.fromJsonMap(Map<String, dynamic> map)
       : code = map["code"],
         message = map["message"],
-        data = List<CategoryData>.from(map["data"].map((it) => CategoryData.fromJsonMap(it)));
+        data = List<CategoryData>.from(
+            map["data"].map((it) => CategoryData.fromJsonMap(it)));
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -52,11 +53,15 @@ class BxMallSubDto {
   String mallSubName;
   String comments;
 
-  BxMallSubDto.fromJsonMap(Map<String, dynamic> map)
-      : mallSubId = map["mallSubId"],
-        mallCategoryId = map["mallCategoryId"],
-        mallSubName = map["mallSubName"],
-        comments = map["comments"];
+  BxMallSubDto(
+      {this.mallSubId, this.mallCategoryId, this.mallSubName, this.comments});
+
+  BxMallSubDto.fromJsonMap(Map<String, dynamic> map) {
+    mallSubId = map["mallSubId"];
+    mallCategoryId = map["mallCategoryId"];
+    mallSubName = map["mallSubName"];
+    comments = map["comments"];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
