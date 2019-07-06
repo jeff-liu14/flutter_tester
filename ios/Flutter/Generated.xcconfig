@@ -1,10 +1,9 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/aihuishou/flutter
-FLUTTER_APPLICATION_PATH=/Users/aihuishou/Desktop/flutter_shop
-FLUTTER_TARGET=/Users/aihuishou/Desktop/flutter_shop/lib/main.dart
+FLUTTER_ROOT=/Users/moment/flutter-sdk/flutter
+FLUTTER_APPLICATION_PATH=/Users/moment/Desktop/flutter_tester
+FLUTTER_TARGET=/Users/moment/Desktop/flutter_tester/lib/main.dart
 FLUTTER_BUILD_DIR=build
 SYMROOT=${SOURCE_ROOT}/../build/ios
-FLUTTER_FRAMEWORK_DIR=/Users/aihuishou/flutter/bin/cache/artifacts/engine/ios
+FLUTTER_FRAMEWORK_DIR=/Users/moment/flutter-sdk/flutter/bin/cache/artifacts/engine/ios
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
-TRACK_WIDGET_CREATION=true

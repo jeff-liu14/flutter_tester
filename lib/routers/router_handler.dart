@@ -4,7 +4,7 @@ import 'package:flutter_shop/pages/details_page.dart';
 
 var detailsHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  String goodsId = params['id'].toString();
+  var goodsId = params['id'][0];
   print('id is : $goodsId');
   return DetailsPage(goodsId);
 });

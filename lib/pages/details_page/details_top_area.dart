@@ -9,7 +9,10 @@ class DetailsTopArea extends StatelessWidget {
     return Provide<DetailsInfoProvide>(
       builder: (context, child, data) {
         if (data != null) {
-          var goodsInfo = data.goodsInfo.data.goodInfo;
+          var goodsInfo = Provide.value<DetailsInfoProvide>(context)
+              .goodsInfo
+              .data
+              .goodInfo;
           if (goodsInfo != null) {
             return Container(
               color: Colors.white,
@@ -18,6 +21,7 @@ class DetailsTopArea extends StatelessWidget {
                   _goodsImage(goodsInfo.image1),
                   _goodsName(goodsInfo.goodsName),
                   _goodsNum(goodsInfo.goodsSerialNumber),
+                  _goodsPrice(goodsInfo.presentPrice, goodsInfo.oriPrice),
                 ],
               ),
             );
@@ -36,13 +40,15 @@ class DetailsTopArea extends StatelessWidget {
     return Image.network(
       url,
       width: ScreenUtil().setWidth(740),
+      height: ScreenUtil().setHeight(600),
     );
   }
 
   // 商品名称
   Widget _goodsName(name) {
     return Container(
-      height: ScreenUtil().setWidth(740),
+      alignment: Alignment.topLeft,
+      width: ScreenUtil().setWidth(740),
       padding: EdgeInsets.only(left: 15),
       child: Text(
         name,
@@ -68,8 +74,55 @@ class DetailsTopArea extends StatelessWidget {
       child: Text(
         '编号: $num',
         style: TextStyle(
-          color: Colors.black12,
+          color: Colors.black38,
         ),
+      ),
+    );
+  }
+
+  // 商品价格
+  Widget _goodsPrice(double price, double oriPrice) {
+    return Container(
+      width: ScreenUtil().setWidth(740),
+      padding: EdgeInsets.only(
+        left: 15,
+        right: 15,
+        bottom: 5,
+      ),
+      margin: EdgeInsets.only(
+        top: 8,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            '￥$price',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: ScreenUtil().setSp(36),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 10),
+          ),
+          Text(
+            '市场价: ',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: ScreenUtil().setSp(26),
+            ),
+          ),
+          Text(
+            '￥$oriPrice',
+            style: TextStyle(
+              color: Colors.black26,
+              fontSize: ScreenUtil().setSp(26),
+              decoration: TextDecoration.lineThrough,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/aihuishou/Desktop/flutter_tester/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-bg/values-bg.xml",
+            "outputFile": "/Users/moment/Desktop/flutter_tester/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-bg/values-bg.xml",
             "map": [
                 {
-                    "source": "/Users/aihuishou/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/ac8ee79c55f095d5fc8ff31be33295f5/res/values-bg/values-bg.xml",
+                    "source": "/Users/moment/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/0e745dd78539427a6ffd2ae762d257e8/res/values-bg/values-bg.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

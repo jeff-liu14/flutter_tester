@@ -330,6 +330,7 @@ class Recommend extends StatelessWidget {
   // 标题
   Widget _titleWidget() {
     return Container(
+      height: ScreenUtil().setHeight(40),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.fromLTRB(10, 2, 0, 5),
       decoration: BoxDecoration(
@@ -351,21 +352,33 @@ class Recommend extends StatelessWidget {
             context, '/detail?id=${recommendList[index]['goodsId']}');
       },
       child: Container(
-        height: ScreenUtil().setHeight(280),
+        height: ScreenUtil().setHeight(240),
         width: ScreenUtil().setWidth(250),
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border(left: BorderSide(width: 1, color: Colors.black12))),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Image.network(recommendList[index]['image']),
-            Text('￥${recommendList[index]['mallPrice']}'),
-            Text(
-              '￥${recommendList[index]['price']}',
-              style: TextStyle(
-                  decoration: TextDecoration.lineThrough, color: Colors.grey),
-            )
+            Container(
+              width: ScreenUtil().setWidth(225),
+              height: ScreenUtil().setHeight(180),
+              child: Image.network(recommendList[index]['image']),
+            ),
+            Container(
+              height: ScreenUtil().setHeight(30),
+              child: Text('￥${recommendList[index]['mallPrice']}'),
+            ),
+            Container(
+              height: ScreenUtil().setHeight(30),
+              child: Text(
+                '￥${recommendList[index]['price']}',
+                style: TextStyle(
+                    decoration: TextDecoration.lineThrough, color: Colors.grey),
+              ),
+            ),
           ],
         ),
       ),
@@ -374,22 +387,22 @@ class Recommend extends StatelessWidget {
 
   // 横向列表
   Widget _recommentList() {
-    return Container(
-      height: ScreenUtil().setHeight(280),
-      child: ListView.builder(
+    return Expanded(
+      child: Container(
+          child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: recommendList.length,
         itemBuilder: (context, index) {
           return _item(context, index);
         },
-      ),
+      )),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(330),
+      height: ScreenUtil().setHeight(305),
       margin: EdgeInsets.only(top: 10),
       child: Column(
         children: <Widget>[_titleWidget(), _recommentList()],
@@ -459,8 +472,8 @@ class FloorContent extends StatelessWidget {
       width: ScreenUtil().setWidth(375),
       child: InkWell(
         onTap: () {
-          Application.router.navigateTo(
-              context, '/detail?id=${goods['goodsId']}');
+          Application.router
+              .navigateTo(context, '/detail?id=${goods['goodsId']}');
           print('点击了楼层商品');
         },
         child: Image.network(goods['image']),

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/aihuishou/Desktop/flutter_tester/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/moment/Desktop/flutter_tester/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/Users/aihuishou/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/ac8ee79c55f095d5fc8ff31be33295f5/res/values/values.xml",
+                    "source": "/Users/moment/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/0e745dd78539427a6ffd2ae762d257e8/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,13,56,88,125,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,171,172,176,177,178",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/aihuishou/Desktop/flutter_tester/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/moment/Desktop/flutter_tester/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
