@@ -172,13 +172,21 @@ class _HomePageState extends State<HomePage>
                 ),
                 Row(
                   children: <Widget>[
-                    Text('￥${item['mallPrice']}'),
-                    Text(
-                      '￥${item['price']}',
-                      style: TextStyle(
-                          color: Colors.black26,
-                          decoration: TextDecoration.lineThrough),
-                    )
+                    Container(
+
+                      alignment: Alignment.centerLeft,
+                      child: Text('￥${item['mallPrice']}'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20.0),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '￥${item['price']}',
+                        style: TextStyle(
+                            color: Colors.black26,
+                            decoration: TextDecoration.lineThrough),
+                      ),
+                    ),
                   ],
                 )
               ],
@@ -244,32 +252,33 @@ class TopNavigator extends StatelessWidget {
 
   Widget _gridViewItemUI(BuildContext context, item) {
     return InkWell(
-      onTap: () {
-        print('点击了导航');
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.network(
-            item['image'],
-            width: ScreenUtil().setWidth(95),
+        onTap: () {
+          print('点击了导航');
+        },
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Image.network(
+                item['image'],
+                width: ScreenUtil().setWidth(95),
+              ),
+              Text(item['mallCategoryName'])
+            ],
           ),
-          Text(item['mallCategoryName'])
-        ],
-      ),
-    );
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(280),
-      padding: EdgeInsets.all(3),
+      margin: EdgeInsets.all(6),
+      alignment: Alignment.center,
       child: GridView.count(
+        shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 5,
-        padding: EdgeInsets.all(5),
+        scrollDirection: Axis.vertical,
+        childAspectRatio: 1,
         children: navigatorList.map((item) {
           return _gridViewItemUI(context, item);
         }).toList(),
@@ -330,7 +339,6 @@ class Recommend extends StatelessWidget {
   // 标题
   Widget _titleWidget() {
     return Container(
-      height: ScreenUtil().setHeight(40),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.fromLTRB(10, 2, 0, 5),
       decoration: BoxDecoration(
@@ -345,14 +353,12 @@ class Recommend extends StatelessWidget {
   }
 
   // 商品item
-  Widget _item(BuildContext context, index) {
+  Widget _item(BuildContext context, item) {
     return InkWell(
       onTap: () {
-        Application.router.navigateTo(
-            context, '/detail?id=${recommendList[index]['goodsId']}');
+        Application.router.navigateTo(context, '/detail?id=${item['goodsId']}');
       },
       child: Container(
-        height: ScreenUtil().setHeight(240),
         width: ScreenUtil().setWidth(250),
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -363,18 +369,17 @@ class Recommend extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              width: ScreenUtil().setWidth(225),
-              height: ScreenUtil().setHeight(180),
-              child: Image.network(recommendList[index]['image']),
+              width: ScreenUtil().setWidth(234),
+              child: Image.network(item['image']),
             ),
             Container(
-              height: ScreenUtil().setHeight(30),
-              child: Text('￥${recommendList[index]['mallPrice']}'),
+              alignment: Alignment.center,
+              child: Text('￥${item['mallPrice']}'),
             ),
             Container(
-              height: ScreenUtil().setHeight(30),
+              alignment: Alignment.center,
               child: Text(
-                '￥${recommendList[index]['price']}',
+                '￥${item['price']}',
                 style: TextStyle(
                     decoration: TextDecoration.lineThrough, color: Colors.grey),
               ),
@@ -385,27 +390,49 @@ class Recommend extends StatelessWidget {
     );
   }
 
+  List<Widget> _getItemList(BuildContext context) {
+    List<Widget> list = [];
+    for (int i = 0; i < recommendList.length; i++) {
+      list.add(_item(context, i));
+    }
+    return list;
+  }
+
   // 横向列表
-  Widget _recommentList() {
-    return Expanded(
-      child: Container(
-          child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: recommendList.length,
-        itemBuilder: (context, index) {
-          return _item(context, index);
-        },
-      )),
+  Widget _recommentList(BuildContext context) {
+    return Wrap(
+      direction: Axis.horizontal,
+      children: recommendList.map((item) {
+        return _item(context, item);
+      }).toList(),
+    );
+  }
+
+  Widget _grid(BuildContext context) {
+    return Container(
+      child: GridView.count(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        crossAxisCount: 3,
+        scrollDirection: Axis.vertical,
+        childAspectRatio: 3 / 4,
+        children: recommendList.map((item) {
+          return _item(context, item);
+        }).toList(),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(310),
       margin: EdgeInsets.only(top: 10),
       child: Column(
-        children: <Widget>[_titleWidget(), _recommentList()],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _titleWidget(),
+          _grid(context),
+        ],
       ),
     );
   }

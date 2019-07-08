@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 08 11:34:10 CST 2019
+#Mon Jul 08 14:36:45 CST 2019
 4.path=lib/arm64-v8a/libflutter.so
 8.set=ASSET
 6.path=flutter_assets/vm_snapshot_data
