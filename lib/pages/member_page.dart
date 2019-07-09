@@ -29,19 +29,20 @@ class MemberPage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(top: 30),
+            width: ScreenUtil().setWidth(250),
+            margin: EdgeInsets.only(top: 20),
             child: ClipOval(
               child: Image.network(
-                  'http://blogimages.jspang.com/blogtouxiang1.jpg'),
+                  'https://avatars3.githubusercontent.com/u/9353931?s=460&v=4'),
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 10,bottom: 10),
             child: Text(
-              '测试',
+              'Jeffery',
               style: TextStyle(
-                color: Colors.black54,
-                fontSize: ScreenUtil().setSp(36),
+                color: Colors.white,
+                fontSize: ScreenUtil().setSp(46),
               ),
             ),
           ),

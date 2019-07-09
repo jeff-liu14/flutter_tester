@@ -1,4 +1,4 @@
-#Tue Jul 09 13:44:16 CST 2019
+#Tue Jul 09 13:47:39 CST 2019
 base.0=/Users/aihuishou/Desktop/flutter_tester/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex
