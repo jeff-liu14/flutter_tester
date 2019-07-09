@@ -10,6 +10,7 @@ import '../provide/category_goods_list.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../routers/application.dart';
+import '../provide/category_left.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -50,9 +51,6 @@ class LeftCategoryNav extends StatefulWidget {
 }
 
 class _LeftCategoryNavState extends State<LeftCategoryNav> {
-  List<CategoryData> list = [];
-  var listIndex = 0;
-
   @override
   void initState() {
     _getCategory();
@@ -61,37 +59,43 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: ScreenUtil().setWidth(180),
-      decoration: BoxDecoration(
-          border: Border(
-        right: BorderSide(
-          width: 1,
-          color: Colors.black12,
-        ),
-      )),
-      child: ListView.builder(
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          return _leftInkView(index);
-        },
-      ),
+    return Provide<CategoryLeftProvide>(
+      builder: (context, child, value) {
+        return Container(
+          width: ScreenUtil().setWidth(180),
+          decoration: BoxDecoration(
+              border: Border(
+            right: BorderSide(
+              width: 1,
+              color: Colors.black12,
+            ),
+          )),
+          child: ListView.builder(
+            itemCount: Provide.value<CategoryLeftProvide>(context).list.length,
+            itemBuilder: (context, index) {
+              return _leftInkView(context, index);
+            },
+          ),
+        );
+      },
     );
   }
 
-  Widget _leftInkView(int index) {
+  Widget _leftInkView(BuildContext context, int index) {
+    var currentIndex = Provide.value<CategoryLeftProvide>(context).currentIndex;
+    var list = Provide.value<CategoryLeftProvide>(context).list;
+
     bool isClick = false;
-    isClick = (index == listIndex) ? true : false;
+    isClick = (index == currentIndex) ? true : false;
     return InkWell(
       onTap: () {
-        setState(() {
-          listIndex = index;
-        });
+        Provide.value<CategoryLeftProvide>(context).changeIndex(index);
         var childList = list[index].bxMallSubDto;
         var categoryId = list[index].mallCategoryId;
         Provide.value<ChildCategory>(context)
             .getChildCategory(childList, categoryId);
-        _getGoodsList(categoryId: categoryId);
+        Provide.value<CategoryLeftProvide>(context)
+                .getGoodsList(context, categoryId);
       },
       child: Container(
         height: ScreenUtil().setHeight(100),
@@ -112,27 +116,13 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
     await request('getCategory').then((value) {
       var data = json.decode(value.toString());
       CategoryModelResp categoryModelResp = CategoryModelResp.fromJsonMap(data);
-      setState(() {
-        list.addAll(categoryModelResp.data);
-      });
+      Provide.value<CategoryLeftProvide>(context)
+          .getCategoryData(categoryModelResp.data);
+      var list = Provide.value<CategoryLeftProvide>(context).list;
       Provide.value<ChildCategory>(context)
           .getChildCategory(list[0].bxMallSubDto, list[0].mallCategoryId);
-      _getGoodsList(categoryId: list[0].mallCategoryId);
-    });
-  }
-
-  void _getGoodsList({String categoryId}) async {
-    var data = {
-      'categoryId': categoryId == null ? '4' : categoryId,
-      'categorySubId': "",
-      'page': 1,
-    };
-    await request('getMallGoods', formData: data).then((value) {
-      var data = json.decode(value.toString());
-      CategoryGoodsListModel goodsListModel =
-          CategoryGoodsListModel.fromJson(data);
-      Provide.value<CategoryGoodsListProvide>(context)
-          .getGoodsList(goodsListModel.data);
+      Provide.value<CategoryLeftProvide>(context)
+          .getGoodsList(context, list[0].mallCategoryId);
     });
   }
 }

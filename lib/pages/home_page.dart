@@ -7,6 +7,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../routers/application.dart';
 import '../routers/routers.dart';
+import '../provide/current_index.dart';
+import 'package:provide/provide.dart';
+import '../provide/category_left.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -173,7 +176,6 @@ class _HomePageState extends State<HomePage>
                 Row(
                   children: <Widget>[
                     Container(
-
                       alignment: Alignment.centerLeft,
                       child: Text('￥${item['mallPrice']}'),
                     ),
@@ -251,9 +253,12 @@ class TopNavigator extends StatelessWidget {
   const TopNavigator({Key key, this.navigatorList}) : super(key: key);
 
   Widget _gridViewItemUI(BuildContext context, item) {
+    var categoryId = item['mallCategoryId'];
     return InkWell(
         onTap: () {
-          print('点击了导航');
+          Provide.value<CurrentIndexProvide>(context).changeIndex(1);
+          Provide.value<CategoryLeftProvide>(context)
+              .mainChangeIndex(context, categoryId);
         },
         child: Container(
           child: Column(
