@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:provide/provide.dart';
-import '../provide/counter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MemberPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('会员中心'),
       ),
       body: ListView(
+        shrinkWrap: true,
         children: <Widget>[
           _topHead(),
           _orderTitle(),
@@ -23,25 +23,24 @@ class MemberPage extends StatelessWidget {
 
   Widget _topHead() {
     return Container(
-      width: ScreenUtil().setWidth(750),
-      padding: EdgeInsets.all(20),
       color: Colors.pinkAccent,
       child: Column(
         children: <Widget>[
           Container(
-            width: ScreenUtil().setWidth(250),
-            margin: EdgeInsets.only(top: 20),
-            child: ClipOval(
-              child: Image.asset('assets/images/avator.jpg'),
+            margin: EdgeInsets.only(top: 30),
+            child: CircleAvatar(
+              radius: 56.0,
+              backgroundImage: AssetImage('images/avator.png'),
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 10,bottom: 10),
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(top: 10, bottom: 30),
             child: Text(
-              'Jeffery',
+              '待发货',
+              textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
-                fontSize: ScreenUtil().setSp(46),
+                      color: Colors.white, fontSize: ScreenUtil().setSp(36)
               ),
             ),
           ),
@@ -71,64 +70,86 @@ class MemberPage extends StatelessWidget {
 
   Widget _orderType() {
     return Container(
-      margin: EdgeInsets.only(top: 5),
-      width: ScreenUtil().setWidth(750),
-      height: ScreenUtil().setHeight(150),
-      padding: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.all(10.0),
       color: Colors.white,
       child: Row(
         children: <Widget>[
-          Container(
-            width: ScreenUtil().setWidth(187),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.party_mode,
-                  size: 30,
-                ),
-                Text('待付款'),
-              ],
+          Expanded(
+            child: Container(
+              width: ScreenUtil().setWidth(187),
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.party_mode,
+                    size: 30,
+                  ),
+                  Text(
+                    '待付款',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
+
           //------------
-          Container(
-            width: ScreenUtil().setWidth(187),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.query_builder,
-                  size: 30,
-                ),
-                Text('待发货'),
-              ],
+          Expanded(
+            child: Container(
+              width: ScreenUtil().setWidth(187),
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.query_builder,
+                    size: 30,
+                  ),
+                  Text(
+                    '待发货',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
+
           //------------
-          Container(
-            width: ScreenUtil().setWidth(187),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.directions_car,
-                  size: 30,
-                ),
-                Text('待收货'),
-              ],
+          Expanded(
+            child: Container(
+              width: ScreenUtil().setWidth(187),
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.directions_car,
+                    size: 30,
+                  ),
+                  Text(
+                    '待收货',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
+
           //------------
-          Container(
-            width: ScreenUtil().setWidth(187),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.content_paste,
-                  size: 30,
-                ),
-                Text('待评价'),
-              ],
+          Expanded(
+            child: Container(
+              width: ScreenUtil().setWidth(187),
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.content_paste,
+                    size: 30,
+                  ),
+                  Text(
+                    '待评价',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
+
           //------------
         ],
       ),
