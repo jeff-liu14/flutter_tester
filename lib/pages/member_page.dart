@@ -32,8 +32,7 @@ class MemberPage extends StatelessWidget {
             width: ScreenUtil().setWidth(250),
             margin: EdgeInsets.only(top: 20),
             child: ClipOval(
-              child: Image.network(
-                  'https://avatars3.githubusercontent.com/u/9353931?s=460&v=4'),
+              child: Image.asset('assets/images/avator.jpg'),
             ),
           ),
           Container(

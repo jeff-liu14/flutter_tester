@@ -11,12 +11,17 @@ class CartBottom extends StatelessWidget {
       color: Colors.white,
       child: Provide<CartProvide>(
         builder: (context, child, val) {
-          return Row(
-            children: <Widget>[
-              _selectAllBtn(context),
-              _allPriceArea(context),
-              _goButton(context),
-            ],
+          return Container(
+            width: ScreenUtil().setWidth(750),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                _selectAllBtn(context),
+                _allPriceArea(context),
+                _goButton(context),
+              ],
+            ),
           );
         },
       ),
@@ -26,7 +31,8 @@ class CartBottom extends StatelessWidget {
   Widget _selectAllBtn(BuildContext context) {
     bool isAllCheck = Provide.value<CartProvide>(context).isAllCheck;
     return Container(
-      width: ScreenUtil().setWidth(160),
+      alignment: Alignment.centerLeft,
+//      width: ScreenUtil().setWidth(160),
       child: Row(
         children: <Widget>[
           Checkbox(
@@ -45,9 +51,10 @@ class CartBottom extends StatelessWidget {
   Widget _allPriceArea(BuildContext context) {
     double allPrice = Provide.value<CartProvide>(context).allPrice;
     return Container(
-      width: ScreenUtil().setWidth(400),
-      alignment: Alignment.centerRight,
+//      width: ScreenUtil().setWidth(400),
+    alignment: Alignment.centerRight,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Container(
             alignment: Alignment.centerRight,
@@ -59,17 +66,17 @@ class CartBottom extends StatelessWidget {
                   child: Text(
                     '合计: ',
                     style: TextStyle(
-                      fontSize: ScreenUtil().setSp(36),
+                      fontSize: ScreenUtil().setSp(34),
                     ),
                   ),
                 ),
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    '￥$allPrice',
+                    '￥${allPrice.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: Colors.red,
-                      fontSize: ScreenUtil().setSp(36),
+                      fontSize: ScreenUtil().setSp(34),
                     ),
                   ),
                 ),
@@ -94,7 +101,8 @@ class CartBottom extends StatelessWidget {
   Widget _goButton(BuildContext context) {
     int allGoodsCount = Provide.value<CartProvide>(context).allGoodsCount;
     return Container(
-      width: ScreenUtil().setWidth(160),
+      alignment: Alignment.centerRight,
+//      width: ScreenUtil().setWidth(160),
       padding: EdgeInsets.only(left: 10),
       child: InkWell(
         onTap: () {},
