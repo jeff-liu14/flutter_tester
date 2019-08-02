@@ -11,6 +11,7 @@ import './routers/routers.dart';
 import './provide/cart.dart';
 import './provide/current_index.dart';
 import './provide/category_left.dart';
+import './test/test.dart';
 
 void main() {
   var counter = Counter();
@@ -33,7 +34,9 @@ void main() {
     ..provide(Provider<CurrentIndexProvide>.value(currentIndexProvide))
     ..provide(Provider<CategoryLeftProvide>.value(categoryLeftProvide));
 
-  runApp(ProviderNode(child: MyApp(), providers: providers));
+//  runApp(ProviderNode(child: MyApp(), providers: providers));
+
+  runApp(TestApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -49,6 +52,20 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.pink),
         home: IndexPage(),
+      ),
+    );
+  }
+}
+
+class TestApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: MaterialApp(
+        title: "测试",
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(primaryColor: Colors.blueAccent),
+        home: TestMain(),
       ),
     );
   }
