@@ -34,9 +34,9 @@ void main() {
     ..provide(Provider<CurrentIndexProvide>.value(currentIndexProvide))
     ..provide(Provider<CategoryLeftProvide>.value(categoryLeftProvide));
 
-//  runApp(ProviderNode(child: MyApp(), providers: providers));
+  runApp(ProviderNode(child: MyApp(), providers: providers));
 
-  runApp(TestApp());
+//  runApp(TestApp());
 }
 
 class MyApp extends StatelessWidget {
